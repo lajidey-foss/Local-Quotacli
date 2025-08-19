@@ -82,7 +82,7 @@ app_license = "mit"
 # Installation
 # ------------
 
-# before_install = "local_quotacli.install.before_install"
+before_install = "local_quotacli.install.before_install"
 # after_install = "local_quotacli.install.after_install"
 
 # Uninstallation
@@ -137,13 +137,12 @@ app_license = "mit"
 # ---------------
 # Hook on document methods and events
 
-# doc_events = {
-# 	"*": {
-# 		"on_update": "method",
-# 		"on_cancel": "method",
-# 		"on_trash": "method"
-# 	}
-# }
+doc_events = {
+	"Fiscal Year": {
+        "validate": "local_quotacli.utils.allot.newfy_limit",
+		"on_update": "local_quotacli.utils.allot.newfy_limit"
+	}
+}
 
 # Scheduled Tasks
 # ---------------
