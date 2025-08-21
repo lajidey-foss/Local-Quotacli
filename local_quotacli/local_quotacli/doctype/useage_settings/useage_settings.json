@@ -1,0 +1,55 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2025-08-19 16:29:02.994902",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "server_name",
+  "column_break_flry",
+  "auto_check"
+ ],
+ "fields": [
+  {
+   "fieldname": "server_name",
+   "fieldtype": "Read Only",
+   "label": "Server Name"
+  },
+  {
+   "fieldname": "column_break_flry",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "0",
+   "description": "Auto download when connected and notify when download is complete",
+   "fieldname": "auto_check",
+   "fieldtype": "Check",
+   "label": "Auto Check"
+  }
+ ],
+ "grid_page_length": 50,
+ "index_web_pages_for_search": 1,
+ "issingle": 1,
+ "links": [],
+ "modified": "2025-08-19 16:35:06.944892",
+ "modified_by": "Administrator",
+ "module": "Local Quotacli",
+ "name": "Useage Settings",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "print": 1,
+   "read": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "row_format": "Dynamic",
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}
