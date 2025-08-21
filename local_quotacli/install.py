@@ -1,13 +1,15 @@
 import frappe
 from frappe.installer import update_site_config
-from frappe.utils.data import add_days, add_years, today, get_year_ending, get_date_str
+from frappe.utils.data import add_days, today, get_date_str
+from uuid import uuid4
 
 def before_install():    
-    #fy_list = frappe.get_doc
     fy = frappe.get_value("Fiscal Year", {'disabled': 0}, "year_end_date")
+    token = str(uuid4())
 
     data = {
         'valid_till': add_days(today(), 15),
+        'token_key': token,
         'periodfy': get_date_str(fy),
         'document_limit': {
             'Sales Invoice': {'limit': 1000, 'period': 'Daily'},
@@ -17,5 +19,5 @@ def before_install():
         }
     }
     # Updating site config
-    # print (f"before => \n\n {get_date_str(get_year_ending(today()))}")
     update_site_config('allot', data)
+    print (f"installing ==> {token}")
