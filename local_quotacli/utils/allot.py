@@ -9,6 +9,8 @@ PERIOD_START = {
     "Monthly": get_first_day,
 }
 
+EXEMPT_USERS = ("Administrator", "Guest")
+
 
 def get_allot() -> dict:
     """Return the `allot` block of site_config, or {} if it isn't there."""
@@ -34,6 +36,37 @@ def newfy_limit(doc, method=None):
             title=_("Period Not Activated"),
         )
 
+
+def user_limit(doc, method=None):
+    """Cap the number of enabled System Users."""
+    max_users = cint(get_allot().get("user_limit"))
+    if not max_users:
+        return  # not configured, nothing to enforce
+
+    # Only users that would count toward the cap matter
+    if doc.name in EXEMPT_USERS or not doc.enabled or doc.user_type != "System User":
+        return
+
+    # For existing users, only check when they become enabled / a System User
+    if not doc.is_new() and not (
+        doc.has_value_changed("enabled") or doc.has_value_changed("user_type")
+    ):
+        return
+
+    active = frappe.db.count(
+        "User",
+        {
+            "enabled": 1,
+            "user_type": "System User",
+            "name": ["not in", EXEMPT_USERS],
+        },
+    )
+
+    if active >= max_users:
+        frappe.throw(
+            _("You have reached your limit of {0} active users. Please contact your Administrator to increase it.").format(max_users),
+            title=_("User Limit"),
+        )
 
 def document_limit(doc, method=None):
     """Enforce the per-period creation quota for doctypes listed in document_limit."""
