@@ -141,7 +141,10 @@ before_install = "local_quotacli.install.before_install"
 doc_events = {
 	"Fiscal Year": {
         "validate": "local_quotacli.utils.allot.newfy_limit",
-	}
+	},
+    "User": {
+        "validate": "local_quotacli.utils.allot.user_limit",
+    },
 }
 
 # Scheduled Tasks

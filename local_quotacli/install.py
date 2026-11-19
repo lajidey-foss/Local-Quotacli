@@ -21,6 +21,7 @@ def before_install():
         "valid_till": add_days(today(), 15),
         "token_key": hash_token(token),
         "periodfy": get_date_str(fy),
+        "user_limit": 10,
         "document_limit": {
             "Sales Invoice": {"limit": 1000, "period": "Daily"},
             "Purchase Invoice": {"limit": 100, "period": "Weekly"},
