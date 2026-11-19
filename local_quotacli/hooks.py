@@ -136,11 +136,11 @@ before_install = "local_quotacli.install.before_install"
 # Document Events
 # ---------------
 # Hook on document methods and events
+# "on_update": "local_quotacli.utils.allot.newfy_limit"
 
 doc_events = {
 	"Fiscal Year": {
         "validate": "local_quotacli.utils.allot.newfy_limit",
-		"on_update": "local_quotacli.utils.allot.newfy_limit"
 	}
 }
 
